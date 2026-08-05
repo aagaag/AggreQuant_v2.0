@@ -85,8 +85,6 @@ dev = [
 
 [project.scripts]
 aggrequant = "aggrequant.cli:main"
-aggrequant-train = "aggrequant.nn.cli:train"
-aggrequant-benchmark = "aggrequant.nn.cli:benchmark"
 aggrequant-gui = "aggrequant.gui_web.app:main"
 
 [project.urls]

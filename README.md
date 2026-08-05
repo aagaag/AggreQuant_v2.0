@@ -69,16 +69,19 @@ pip install customtkinter
 Run analysis from a YAML configuration file:
 
 ```bash
-python scripts/run_pipeline.py configs/test_384well.yaml
+aggrequant configs/test_384well.yaml
 ```
 
 Available options:
 
 ```bash
-python scripts/run_pipeline.py configs/test_384well.yaml --verbose          # Enable detailed logging
-python scripts/run_pipeline.py configs/test_384well.yaml --max-fields 5     # Process only 5 fields (quick test)
-python scripts/run_pipeline.py configs/test_384well.yaml --segmentation-only  # Skip quantification and plots
+aggrequant configs/test_384well.yaml --verbose            # Enable detailed logging
+aggrequant configs/test_384well.yaml --max-fields 5       # Process only 5 fields (quick test)
+aggrequant configs/test_384well.yaml --segmentation-only  # Skip quantification and plots
 ```
+
+The legacy `python scripts/run_pipeline.py ...` invocation remains available and uses the
+same implementation.
 
 See `configs/test_384well.yaml` for a documented example of all configuration options.
 

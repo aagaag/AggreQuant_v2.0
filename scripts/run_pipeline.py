@@ -1,72 +1,8 @@
 #!/usr/bin/env python
-"""
-Run the AggreQuant segmentation pipeline from a YAML configuration file.
+"""Backward-compatible wrapper for the packaged AggreQuant CLI."""
 
-Usage:
-    python scripts/run_pipeline.py configs/test_384well.yaml
-    python scripts/run_pipeline.py configs/test_384well.yaml --verbose
-"""
-
-import sys
-import argparse
-from pathlib import Path
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="Run AggreQuant segmentation pipeline from YAML config",
-    )
-    parser.add_argument(
-        "config",
-        type=Path,
-        help="Path to YAML configuration file"
-    )
-    parser.add_argument(
-        "--verbose", "-v",
-        action="store_true",
-        help="Print verbose output"
-    )
-    parser.add_argument(
-        "--max-fields",
-        type=int,
-        default=None,
-        help="Stop after processing this many fields (for quick testing)"
-    )
-    parser.add_argument(
-        "--segmentation-only",
-        action="store_true",
-        help="Only run segmentation (skip quantification, CSV output, and plots)"
-    )
-
-    args = parser.parse_args()
-
-    if not args.config.exists():
-        print(f"Error: Config file not found: {args.config}")
-        sys.exit(1)
-
-    from aggrequant.pipeline import SegmentationPipeline
-
-    try:
-        print(f"Loading configuration from {args.config}")
-        pipeline = SegmentationPipeline(
-            config_path=args.config,
-            verbose=args.verbose,
-        )
-        pipeline.run(
-            max_fields=args.max_fields,
-            segmentation_only=args.segmentation_only,
-        )
-
-    except KeyboardInterrupt:
-        print("\n\nAnalysis cancelled by user.")
-        sys.exit(1)
-
-    except Exception as e:
-        print(f"\nError: {e}")
-        import traceback
-        traceback.print_exc()
-        sys.exit(1)
+from aggrequant.cli import main
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
